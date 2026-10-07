@@ -1,10 +1,12 @@
 from .calculos import frete, total_carrinho
 from .produto import Produto
+from .promocao import SemPromocao
 
 class Carrinho:
-    def __init__(self):
+    def __init__(self, promocao=None):
         self._itens = []
         self._finalizado = False
+        self.promocao = promocao or SemPromocao()
 
     def adicionar(self, produto, quantidade=1):
         if self._finalizado:
@@ -32,3 +34,8 @@ class Carrinho:
         if not self._itens:
             raise ValueError("não é possível finalizar um carrinho vazio")
         self._finalizado = True
+    @property
+    def total(self):
+        com_desconto = self.promocao.aplicar(self.subtotal)
+        return com_desconto + frete(com_desconto)
+
