@@ -19,3 +19,19 @@ class Cupom:
 
     def aplicar(self, subtotal):
         return max(subtotal - self.valor, 0)
+
+from abc import ABC, abstractmethod
+class Promocao(ABC):
+
+    @abstractmethod
+    def aplicar(self, subtotal):
+        pass
+
+class SemPromocao(Promocao):
+    def aplicar(self, subtotal):
+        return subtotal
+
+class Percentual(Promocao):
+    def __init__(self, pct):
+        if not 0 <= pct <= 100:
+            raise ValueError("percentual deve estar entre 0 e 100")
