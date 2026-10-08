@@ -6,13 +6,18 @@ vitrine = [
     {"nome": "Moletom", "preço": 159.90, "tamanho": "P"}
 ]
 
-carrinho = [("Camiseta Básica", 3), ("Calça Jeans", 1)]
+carrinho = [
+    ("Camiseta Básica", 3),
+    ("Calça Jeans", 1)
+]
 
 precos = {}
+
 for produto in vitrine:
     precos[produto["nome"]] = produto["preço"]
 
 total = 0
+
 for nome, quantidade in carrinho:
     total = total + precos[nome] * quantidade
 
